@@ -232,7 +232,13 @@ function triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit) {
 function positionGameObjects(array) {
   $("td").text("");
   array.forEach(function(element) {
-    $(".y" + element.yCoordinate + " .x" + element.xCoordinate).html("<img src=\"img/" + element.avatar + "\">");
+    if (element.enemyDirection === "left") {
+      $(".y" + element.yCoordinate + " .x" + element.xCoordinate).html("<img src=\"img/" + element.avatar + "\" class=\"left\">");
+    } else if (element.enemyDirection === "right") {
+      $(".y" + element.yCoordinate + " .x" + element.xCoordinate).html("<img src=\"img/" + element.avatar + "\" class=\"right\">");
+    } else {
+      $(".y" + element.yCoordinate + " .x" + element.xCoordinate).html("<img src=\"img/" + element.avatar + "\">");
+    }
   });
 }
 
@@ -253,8 +259,8 @@ $(document).ready(function() {
   var enemies = [];
   var player = new GameObject("player.png", 0, 0);
   var toilet = new GameObject("toilet.png", 5, 5);
-  var enemy1 = new GameObject("poop.png", 1, 4, "patrol");
-  var enemy2 = new GameObject("hunter.gif", 5, 0, "hunter", player);
+  var enemy1 = new GameObject("cuteCat.gif", 1, 4, "horizontal", "", "right");
+  var enemy2 = new GameObject("grandma.gif", 5, 0, "hunter", player, "left");
   gameObjects.push(toilet);
   gameObjects.push(player);
   gameObjects.push(enemy1);
