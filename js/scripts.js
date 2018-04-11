@@ -267,26 +267,34 @@ $(document).ready(function() {
   var enemies = [];
   var player = new GameObject("player.png", 0, 0);
   var toilet = new GameObject("toilet.png", 5, 5);
+  var diaper = new GameObject("diaper.png", 0, 5);
   var enemy1 = new GameObject("cat.gif", 1, 4, "horizontal", "", "right");
   var enemy2 = new GameObject("grandma.gif", 5, 0, "hunter", player, "left");
-  var diaper = new GameObject("diaper.png", 0, 5);
+  var enemy3 = new GameObject("grandpa.gif", 5, 4, "hunter", diaper, "right");
+  gameObjects.push(diaper);
   gameObjects.push(toilet);
   gameObjects.push(player);
   gameObjects.push(enemy1);
   gameObjects.push(enemy2);
-  gameObjects.push(diaper);
+  gameObjects.push(enemy3);
+
   enemies.push(enemy1);
   enemies.push(enemy2);
+  enemies.push(enemy3);
 
   positionGameObjects(gameObjects);
 
   function progressTurn() {
     if (player.xCoordinate === diaper.xCoordinate && player.yCoordinate === diaper.yCoordinate) {
       turnLimit += 5;
-      gameObjects.pop();
+      diaper.avatar = "";
       diaper.xCoordinate = "";
     if (enemy2.xCoordinate === diaper.xCoordinate && enemy2.yCoordinate === diaper.yCoordinate) {
-      gameObjects.pop();
+      diaper.avatar = "";
+      diaper.xCoordinate = "";
+    }
+    if (enemy3.xCoordinate === diaper.xCoordinate && enemy3.yCoordinate === diaper.yCoordinate) {
+      diaper.avatar = "";
       diaper.xCoordinate = "";
     }
       console.log(turnLimit);
@@ -295,6 +303,7 @@ $(document).ready(function() {
     if (triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diaper) === false) {
       movePattern(enemy1, enemy1.enemyType, enemy1.enemyTarget, turnCounter);
       movePattern(enemy2, enemy2.enemyType, enemy2.enemyTarget, turnCounter);
+      movePattern(enemy3, enemy3.enemyType, enemy3.enemyTarget, turnCounter);
       positionGameObjects(gameObjects);
     }
     turnCounter ++;
