@@ -63,3 +63,13 @@ td {
 .display-none {
   display: none;
 }
+
+.accident-tile {
+  background: radial-gradient(yellow 0%, white 100%);
+  
+}
+
+/*@keyframes accident {
+  50% {background: radial-gradient(yellow 50%, white 50%);}
+  100% {background: radial-gradient(yellow 100%, white 0%);}
+}*/

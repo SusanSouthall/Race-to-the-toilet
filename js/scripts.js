@@ -215,6 +215,7 @@ function triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit) {
     $("#game-over h4").html("You ran out of time and had an accident.");
     $("#navigation").hide();
     $("#game-over").show();
+    $(".y" + player.yCoordinate + " .x" + player.xCoordinate).addClass("accident-tile");
     interrupt = true;
   }
   enemies.forEach(function(enemy) {
