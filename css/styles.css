@@ -7,6 +7,7 @@ td {
   height: 110px;
   width: 110px;
   text-align: center;
+  background-image: url("../img/tile.jpeg");
 }
 
 #gameboard, #navigation {
@@ -40,8 +41,10 @@ td {
   background-color: #ff5151;
 }
 
-.barrier {
-  background-color: black;
+ .barrier {
+  background-color: tan;
+  background-image: url("../img/flower.png");
+  background-size: cover;
 }
 
 .wall-left {
@@ -65,8 +68,7 @@ td {
 }
 
 .accident-tile {
-  background: radial-gradient(yellow 0%, white 100%);
-
+  background: radial-gradient(yellow 0%, tan 100%);
 }
 
 img {
@@ -80,6 +82,8 @@ img.left {
 img.right {
   transform: scaleX(1);
 }
+
+
 
 /*@keyframes accident {
   50% {background: radial-gradient(yellow 50%, white 50%);}

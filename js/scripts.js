@@ -204,7 +204,7 @@ function notAWall(object, direction) {
 }
 
 // USER INTERFACE LOGIC
-function triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit) {
+function triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diaper) {
   var interrupt = false;
   if (player.xCoordinate === toilet.xCoordinate && player.yCoordinate === toilet.yCoordinate) {
     $("#game-over h4").html("Whew, you win! Don't forget to flush.");
@@ -228,6 +228,14 @@ function triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit) {
   });
   return interrupt;
 }
+
+
+// function AddTurns() {
+//   if (player.xCoordinate === diaper.xCoordinate && player.yCoordinate === diaper.yCoordinate) {
+//     turnLimit += 5;
+//     meter(turnCounter, turnLimit);
+//   }
+// }
 
 function positionGameObjects(array) {
   $("td").text("");
@@ -259,27 +267,39 @@ $(document).ready(function() {
   var enemies = [];
   var player = new GameObject("player.png", 0, 0);
   var toilet = new GameObject("toilet.png", 5, 5);
-  var enemy1 = new GameObject("cuteCat.gif", 1, 4, "horizontal", "", "right");
+  var enemy1 = new GameObject("cat.gif", 1, 4, "horizontal", "", "right");
   var enemy2 = new GameObject("grandma.gif", 5, 0, "hunter", player, "left");
+  var diaper = new GameObject("diaper.png", 0, 5);
   gameObjects.push(toilet);
   gameObjects.push(player);
   gameObjects.push(enemy1);
   gameObjects.push(enemy2);
+  gameObjects.push(diaper);
   enemies.push(enemy1);
   enemies.push(enemy2);
 
   positionGameObjects(gameObjects);
 
   function progressTurn() {
+    if (player.xCoordinate === diaper.xCoordinate && player.yCoordinate === diaper.yCoordinate) {
+      turnLimit += 5;
+      gameObjects.pop();
+      diaper.xCoordinate = "";
+    if (enemy2.xCoordinate === diaper.xCoordinate && enemy2.yCoordinate === diaper.yCoordinate) {
+      gameObjects.pop();
+      diaper.xCoordinate = "";
+    }
+      console.log(turnLimit);
+    }
     positionGameObjects(gameObjects);
-    if (triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit) === false) {
+    if (triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diaper) === false) {
       movePattern(enemy1, enemy1.enemyType, enemy1.enemyTarget, turnCounter);
       movePattern(enemy2, enemy2.enemyType, enemy2.enemyTarget, turnCounter);
       positionGameObjects(gameObjects);
     }
     turnCounter ++;
     meter(turnCounter, turnLimit);
-    triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit);
+    triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diaper);
   }
 
   function playerMove(direction) {
@@ -311,7 +331,7 @@ $(document).ready(function() {
 
   // Arrow Key Navigation
   $(document).keydown(function(e){
-    if (triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit)) {
+    if (triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diaper)) {
       return;
     } else if (e.keyCode === 37) {
        playerMove("left")
