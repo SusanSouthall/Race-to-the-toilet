@@ -246,7 +246,9 @@ function positionGameObjects(array) {
 
 function meter(turnCounter, turnLimit) {
   var percentileWidth = turnCounter / turnLimit * 100;
+  $("#meter").removeClass("warning"); // React to Power Up
   if (percentileWidth >= 40 && percentileWidth < 70) {
+    $("#meter").removeClass("danger"); // React to Power Up
     $("#meter").addClass("warning");
   } else if (percentileWidth >= 70) {
     $("#meter").addClass("danger");
@@ -262,27 +264,43 @@ $(document).ready(function() {
   var player = new GameObject("player.png", 0, 0);
   var toilet = new GameObject("toilet.png", 5, 5);
   var diaper = new GameObject("diaper.png", 0, 5);
+  // var diaper = new GameObject("diaper.png", 5, 0);
   var enemy1 = new GameObject("cat.gif", 1, 4, "horizontal", "", "right");
-  var enemy2 = new GameObject("grandma.gif", 5, 0, "hunter", player, "left");
-  var enemy3 = new GameObject("grandpa.gif", 4, 2, "hunter", diaper, "right");
-  gameObjects.push(diaper);
-  gameObjects.push(toilet);
-  gameObjects.push(player);
-  gameObjects.push(enemy1);
-  gameObjects.push(enemy2);
-  gameObjects.push(enemy3);
+  var enemy2 = new GameObject("grandma.gif", 4, 0, "hunter", player, "left");
+  var enemy3 = new GameObject("grandpa.gif", 5, 3, "hunter", diaper, "right");
 
-  enemies.push(enemy1);
-  enemies.push(enemy2);
-  enemies.push(enemy3);
+  gameObjects.push(diaper, toilet, player, enemy1, enemy2, enemy3);
+  enemies.push(enemy1, enemy2, enemy3);
+
+  // function powerUp() {
+  //   var diaperOne = [diaper1.xCoordinate, diaper1.yCoordinate];
+  //   var diaperTwo = [diaper2.xCoordinate, diaper2.yCoordinate];
+  //   var diapers = [diaperOne, diaperTwo];
+  //   debugger;
+  //   diapers.forEach(function(diaper){
+  //     if (player.xCoordinate === diaper.xCoordinate && player.yCoordinate === diaper.yCoordinate){
+  //       turnLimit += 5;
+  //       diaper.avatar = "";
+  //       diaper.xCoordinate = "";
+  //     }if (enemy2.xCoordinate === diaper.xCoordinate && enemy2.yCoordinate ===      diaper.yCoordinate) {
+  //       diaper.avatar = "";
+  //       diaper.xCoordinate = "";
+  //     }if (enemy3.xCoordinate === diaper.xCoordinate && enemy3.yCoordinate === diaper.yCoordinate) {
+  //       diaper.avatar = "";
+  //       diaper.xCoordinate = "";
+  //     };
+  //   });
+  // };
 
   positionGameObjects(gameObjects);
 
   function progressTurn() {
     if (player.xCoordinate === diaper.xCoordinate && player.yCoordinate === diaper.yCoordinate) {
       turnLimit += 5;
+      console.log(turnLimit);
       diaper.avatar = "";
       diaper.xCoordinate = "";
+    }
     if (enemy2.xCoordinate === diaper.xCoordinate && enemy2.yCoordinate === diaper.yCoordinate) {
       diaper.avatar = "";
       diaper.xCoordinate = "";
@@ -290,11 +308,10 @@ $(document).ready(function() {
     if (enemy3.xCoordinate === diaper.xCoordinate && enemy3.yCoordinate === diaper.yCoordinate) {
       diaper.avatar = "";
       diaper.xCoordinate = "";
-      enemy3.enemyTarget = player;
-      // movePattern(enemy3, enemy3.enemyType, enemy3.enemyTarget, turnCounter);
     }
-      console.log(turnLimit);
-    }
+    // powerUp();
+      console.log(turnCounter);
+
     positionGameObjects(gameObjects);
     if (triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diaper) === false) {
       movePattern(enemy1, enemy1.enemyType, enemy1.enemyTarget, turnCounter);
@@ -329,7 +346,7 @@ $(document).ready(function() {
   }
 
   // Mouse Navigation
-  $("#navigation button").click(function() {
+  $("#navigation button.movement").click(function() {
     var playerDirection = $(this).attr("id");
     playerMove(playerDirection);
   });
@@ -338,16 +355,21 @@ $(document).ready(function() {
   $(document).keydown(function(e){
     if (triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diaper)) {
       return;
-    } else if (e.keyCode === 37) {
+    } else if (e.keyCode === 65) {
        playerMove("left")
-    } else if (e.keyCode === 39) {
+    } else if (e.keyCode === 68) {
        playerMove("right")
-    } else if (e.keyCode === 38) {
+    } else if (e.keyCode === 87) {
        playerMove("up")
-    } else if (e.keyCode === 40) {
+    } else if (e.keyCode === 83) {
        playerMove("down")
     }
   });
+
+  $("#controls .toggle").click(function() {
+  $("#controls button span").toggle();
+  });
+
 
   $("#restart").click(function() {
     location.reload();

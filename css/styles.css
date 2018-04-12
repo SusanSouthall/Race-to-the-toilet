@@ -41,9 +41,39 @@ td {
   background-color: #ff5151;
 }
 
- .barrier {
-  background-color: tan;
+#controls, #controls .row {
+  margin: 0 auto;
+  width: 250px;
+}
+
+#controls .col-xs-4 {
+  margin: 0;
+  padding: 0;
+}
+
+#controls .toggle {
+  width: 97%;
+}
+
+#controls .movement {
+  height: 30px;
+  line-height: 1;
+  margin: 4px 0px;
+  width: 75px;
+}
+.flower {
   background-image: url("../img/flower.png");
+}
+
+.chair {
+  background-image: url("../img/chair.png");
+}
+
+.tv {
+  background-image: url("../img/tv.gif")
+}
+.barrier {
+  background-color: tan;
   background-size: cover;
 }
 
@@ -67,6 +97,11 @@ td {
   display: none;
 }
 
+.faster {
+  font-size: 50px;
+  color: blue;
+  font-family: 'Faster One', cursive;
+}
 .accident-tile {
   background: radial-gradient(yellow 0%, tan 100%);
 }
