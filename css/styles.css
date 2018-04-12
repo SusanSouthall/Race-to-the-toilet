@@ -61,6 +61,7 @@ td {
   margin: 4px 0px;
   width: 75px;
 }
+
 .flower {
   background-image: url("../img/flower.png");
 }
@@ -70,8 +71,13 @@ td {
 }
 
 .tv {
-  background-image: url("../img/tv.gif")
+  background-image: url("../img/tv.gif");
 }
+
+.fishbowl {
+    background-image: url("../img/fishbowl.png");
+}
+
 .barrier {
   background-color: tan;
   background-size: cover;
@@ -121,10 +127,4 @@ img.right {
 
  .collision img {
   background-image: url("../img/bam.png");
-
 }
-
-/*@keyframes accident {
-  50% {background: radial-gradient(yellow 50%, white 50%);}
-  100% {background: radial-gradient(yellow 100%, white 0%);}
-}*/

@@ -1,3 +1,4 @@
+// Business Logic
 function GameObject (avatar, xCoordinate, yCoordinate, type, target, direction) {
   this.avatar = avatar;
   this.xCoordinate = xCoordinate;
@@ -264,33 +265,11 @@ $(document).ready(function() {
   var player = new GameObject("player.png", 0, 0);
   var toilet = new GameObject("toilet.png", 5, 5);
   var diaper = new GameObject("diaper.png", 0, 5);
-  // var diaper = new GameObject("diaper.png", 5, 0);
   var enemy1 = new GameObject("cat.gif", 1, 4, "horizontal", "", "right");
   var enemy2 = new GameObject("grandma.gif", 4, 0, "hunter", player, "left");
   var enemy3 = new GameObject("grandpa.gif", 5, 3, "hunter", diaper, "right");
-
   gameObjects.push(diaper, toilet, player, enemy1, enemy2, enemy3);
   enemies.push(enemy1, enemy2, enemy3);
-
-  // function powerUp() {
-  //   var diaperOne = [diaper1.xCoordinate, diaper1.yCoordinate];
-  //   var diaperTwo = [diaper2.xCoordinate, diaper2.yCoordinate];
-  //   var diapers = [diaperOne, diaperTwo];
-  //   debugger;
-  //   diapers.forEach(function(diaper){
-  //     if (player.xCoordinate === diaper.xCoordinate && player.yCoordinate === diaper.yCoordinate){
-  //       turnLimit += 5;
-  //       diaper.avatar = "";
-  //       diaper.xCoordinate = "";
-  //     }if (enemy2.xCoordinate === diaper.xCoordinate && enemy2.yCoordinate ===      diaper.yCoordinate) {
-  //       diaper.avatar = "";
-  //       diaper.xCoordinate = "";
-  //     }if (enemy3.xCoordinate === diaper.xCoordinate && enemy3.yCoordinate === diaper.yCoordinate) {
-  //       diaper.avatar = "";
-  //       diaper.xCoordinate = "";
-  //     };
-  //   });
-  // };
 
   positionGameObjects(gameObjects);
 
@@ -298,18 +277,14 @@ $(document).ready(function() {
     if (player.xCoordinate === diaper.xCoordinate && player.yCoordinate === diaper.yCoordinate) {
       turnLimit += 5;
       console.log(turnLimit);
-      diaper.avatar = "";
       diaper.xCoordinate = "";
     }
     if (enemy2.xCoordinate === diaper.xCoordinate && enemy2.yCoordinate === diaper.yCoordinate) {
-      diaper.avatar = "";
       diaper.xCoordinate = "";
     }
     if (enemy3.xCoordinate === diaper.xCoordinate && enemy3.yCoordinate === diaper.yCoordinate) {
-      diaper.avatar = "";
       diaper.xCoordinate = "";
     }
-    // powerUp();
       console.log(turnCounter);
 
     positionGameObjects(gameObjects);
@@ -369,7 +344,6 @@ $(document).ready(function() {
   $("#controls .toggle").click(function() {
   $("#controls button span").toggle();
   });
-
 
   $("#restart").click(function() {
     location.reload();
