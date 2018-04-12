@@ -210,6 +210,7 @@ function triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diape
     $("#game-over h4").html("Whew, you win! Don't forget to flush.");
     $("#navigation").hide();
     $("#game-over").show();
+    $(".y" + player.yCoordinate + " .x" + player.xCoordinate).html("<img src='img/dancingMan.gif'>");
     interrupt = true;
   } else if (turnCounter === turnLimit + 1) {
     $("#game-over h4").html("You ran out of time and had an accident.");
@@ -223,19 +224,12 @@ function triggerInterrupt(player, toilet, enemies, turnCounter, turnLimit, diape
       $("#game-over h4").html("You lose!");
       $("#navigation").hide();
       $("#game-over").show();
+      $(".y" + player.yCoordinate + " .x" + player.xCoordinate).html("<img src='img/bam.png'>");
       interrupt = true;
     }
   });
   return interrupt;
 }
-
-
-// function AddTurns() {
-//   if (player.xCoordinate === diaper.xCoordinate && player.yCoordinate === diaper.yCoordinate) {
-//     turnLimit += 5;
-//     meter(turnCounter, turnLimit);
-//   }
-// }
 
 function positionGameObjects(array) {
   $("td").text("");
@@ -270,7 +264,7 @@ $(document).ready(function() {
   var diaper = new GameObject("diaper.png", 0, 5);
   var enemy1 = new GameObject("cat.gif", 1, 4, "horizontal", "", "right");
   var enemy2 = new GameObject("grandma.gif", 5, 0, "hunter", player, "left");
-  var enemy3 = new GameObject("grandpa.gif", 5, 4, "hunter", diaper, "right");
+  var enemy3 = new GameObject("grandpa.gif", 4, 2, "hunter", diaper, "right");
   gameObjects.push(diaper);
   gameObjects.push(toilet);
   gameObjects.push(player);
@@ -296,6 +290,8 @@ $(document).ready(function() {
     if (enemy3.xCoordinate === diaper.xCoordinate && enemy3.yCoordinate === diaper.yCoordinate) {
       diaper.avatar = "";
       diaper.xCoordinate = "";
+      enemy3.enemyTarget = player;
+      // movePattern(enemy3, enemy3.enemyType, enemy3.enemyTarget, turnCounter);
     }
       console.log(turnLimit);
     }
