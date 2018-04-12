@@ -1,4 +1,4 @@
-# _Get to the Crapper!_
+# _Race to the Toilet!!_
 
 #### _Epicodus Team Project - Intro - Week 5, April 9, 2018_
 
@@ -33,7 +33,7 @@
 
 ## Setup/Installation Requirements
 
-1. Visit website link: **Currently Not Available.**
+1. Visit website link: https://susansouthall.github.io/Race-to-the-toilet/
 
 ## Known Bugs
 
@@ -41,7 +41,7 @@ None.
 
 ## Support and Contact
 
-Please send comments and questions to Mike Chu at mcihkue@gmail.com.
+Please send comments and questions to Susan Southall at sue@proteanaegis.com.
 
 ## Technologies Used
 
